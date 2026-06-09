@@ -44,6 +44,32 @@ menuconfig ACPI
 
 if ACPI
 
+choice
+	prompt "ACPI core implementation"
+	default ACPI_ACPICA
+	help
+	  Selects the ACPI Component Architecture (AML interpreter and core
+	  services) implementation that backs the Linux ACPI subsystem.
+
+config ACPI_ACPICA
+	bool "ACPICA (Intel reference implementation)"
+	help
+	  Use the in-tree ACPICA reference implementation. This is the
+	  long-standing default and is recommended unless you are
+	  specifically evaluating an alternative.
+
+config ACPI_UACPI
+	bool "uACPI (compatibility shim)"
+	help
+	  Use the uACPI library instead of ACPICA. The Linux ACPI subsystem
+	  keeps talking to the unchanged ACPICA interface (include/acpi/*);
+	  a compatibility shim translates those calls into uACPI. ACPICA's C
+	  sources are not built in this configuration, only its headers.
+
+	  This is experimental. Say N unless you know what you are doing.
+
+endchoice
+
 config ACPI_LEGACY_TABLES_LOOKUP
 	bool
 

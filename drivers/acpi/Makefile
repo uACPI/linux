@@ -22,8 +22,9 @@ obj-$(CONFIG_ACPI)		+= tables.o
 #
 # ACPI Core Subsystem (Interpreter)
 #
-obj-$(CONFIG_ACPI)		+= acpi.o \
-					acpica/
+obj-$(CONFIG_ACPI)		+= acpi.o
+obj-$(CONFIG_ACPI_ACPICA)	+= acpica/
+obj-$(CONFIG_ACPI_UACPI)	+= uacpi/
 
 # All the builtin files are in the "acpi." module_param namespace.
 acpi-y				+= osi.o osl.o utils.o reboot.o
